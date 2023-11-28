@@ -1,24 +1,35 @@
-import logo from './assets/images/logo.svg';
-import './App.css';
-
+import { useEffect } from "react";
+import Home from "./components/Home";
+import { BrowserRouter as Router } from "react-router-dom";
 function App() {
+  // useEffect(() => {
+  //   // Open (or create) the database
+  //   const open = indexedDB.open("MyDatabase", 1);
+
+  //   // Create the schema
+  //   open.onupgradeneeded = () => {
+  //     const db = open.result;
+  //     db.createObjectStore("MyObjectStore", { keyPath: "id" });
+  //   };
+
+  //   open.onsuccess = () => {
+  //     // Start a new transaction
+  //     const db = open.result;
+  //     const tx = db.transaction("MyObjectStore", "readwrite");
+  //     const store = tx.objectStore("MyObjectStore");
+
+  //     // Add some data
+  //     store.put({ id: 1, name: "John Doe", age: 42 });
+
+  //     // Close the db when the transaction is done
+  //     tx.oncomplete = () => db.close();
+  //   };
+  // }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Home />
+    </Router>
   );
 }
 
