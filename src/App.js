@@ -7,7 +7,7 @@ import Home from "./pages/home/Home";
 import NavBar from "./components/NavBar/navBar";
 import MedsList from "./pages/medsList/MedsList";
 import Groups from "./pages/groups/groups";
-import Notifications from "./pages/notifications/nontifications";
+import Profile from "./pages/profile/profile";
 
 import ImportantUsage from "./components/disclaimers/importantUsage";
 import Disclaimer from "./components/disclaimers/disclaimer";
@@ -32,7 +32,7 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="meds" element={<MedsList />} />
             <Route path="groups" element={<Groups />} />
-            <Route path="notifications" element={<Notifications />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="important" element={<ImportantUsage />} />
             <Route path="disclaimer" element={<Disclaimer />} />
             <Route path="data-privacy" element={<DataPrivacy />} />

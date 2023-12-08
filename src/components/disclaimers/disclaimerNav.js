@@ -13,7 +13,7 @@ function disclaimerNav() {
           <a href="/data-privacy">Data/Privacy Policy</a>
         </li>
         <li>
-          <a href="/disclaimer">Usage Disclaimer</a>
+          <a href="/disclaimer">Application Disclaimer</a>
         </li>
       </ul>
     </div>

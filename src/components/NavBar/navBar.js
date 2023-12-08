@@ -14,7 +14,7 @@ const NavBar = () => {
           <a href="/groups">Grouping</a>
         </li>
         <li>
-          <a href="/notifications">Notifications</a>
+          <a href="/profile">Settings/Profile</a>
         </li>
       </ul>
     </nav>

@@ -7,6 +7,9 @@
   text-align: center;
   /* Additional styling */
 }
+.top-aligned {
+  vertical-align: top;
+}
 
 td {
   min-width: 100px; /* Adjust as needed */
@@ -16,6 +19,12 @@ table {
   width: 100%; /* Adjust as needed */
 }
 
+.spaceRow {
+  text-align: center; /* Centers content horizontally */
+  vertical-align: middle; /* Centers content vertically */
+  min-height: 55px;
+  height: 55px;
+}
 .headerFooter {
-  background-color: rgb(168, 168, 249);
+  background-color: #29a9e0;
 }

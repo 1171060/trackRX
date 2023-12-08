@@ -24,34 +24,60 @@ function MedsList(props) {
                       <td colSpan="4"> &nbsp; {item.medID} &nbsp;</td>
                     </tr>
                     <tr>
-                      <td colspan="2">Name: </td>
-                      <td colspan="2">{item.medName}</td>
+                      <td colspan="2" className="top-aligned">
+                        Name:
+                      </td>
+                      <td colspan="2" className="top-aligned">
+                        {item.medName}
+                      </td>
                     </tr>
                     <tr>
-                      <td colspan="2">Start Date: </td>
-                      <td colspan="2">{item.medStartDate}</td>
+                      <td colspan="2" className="top-aligned">
+                        Start Date:
+                      </td>
+                      <td colspan="2" className="top-aligned">
+                        {item.medStartDate}
+                      </td>
                     </tr>
                     <tr>
-                      <td colspan="2">End Date: </td>
-                      <td colspan="2">{item.medEndDate}</td>
+                      <td colspan="2" className="top-aligned">
+                        End Date:
+                      </td>
+                      <td colspan="2" className="top-aligned">
+                        {item.medEndDate}
+                      </td>
                     </tr>
                     <tr>
-                      <td colspan="2">Dosage: </td>
-                      <td colspan="2">{item.medDose}</td>
+                      <td colspan="2" className="top-aligned">
+                        Dosage:
+                      </td>
+                      <td colspan="2" className="top-aligned">
+                        {item.medDose}
+                      </td>
                     </tr>
                     <tr>
-                      <td colspan="2">Frequency: </td>
-                      <td colspan="2">{item.medFrequency}</td>
+                      <td colspan="2" className="top-aligned">
+                        Frequency:
+                      </td>
+                      <td colspan="2" className="top-aligned">
+                        {item.medFrequency}
+                      </td>
                     </tr>
                     <tr>
-                      <td colspan="2">Instructions: </td>
-                      <td colspan="2">{item.medInstructions}</td>
+                      <td colspan="4" className="top-aligned">
+                        Instructions:
+                      </td>
                     </tr>
                     <tr>
-                      <td style={{ textAlign: "center" }}>ico1</td>
-                      <td style={{ textAlign: "center" }}>ico2</td>
-                      <td style={{ textAlign: "center" }}>ico3</td>
-                      <td style={{ textAlign: "center" }}>ico4</td>
+                      <td colspan="4" className="top-aligned">
+                        {item.medInstructions}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="spaceRow">ico1</td>
+                      <td className="spaceRow">ico2</td>
+                      <td className="spaceRow">ico3</td>
+                      <td className="spaceRow">ico4</td>
                     </tr>
                     <tr className="headerFooter">
                       <td colSpan="4"> &nbsp;</td>
