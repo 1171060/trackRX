@@ -1,0 +1,42 @@
+.primaryColor {
+  color: #2ec0f9;
+}
+.secondaryColor {
+  color: #67aaf9;
+}
+.tertiaryColor {
+  color: #9bbdf9;
+}
+.quaternaryColor {
+  color: #c4e0f9;
+}
+.highlightColor {
+  color: #b95f89;
+}
+.white {
+  color: #ffffff;
+}
+.black {
+  color: #000000;
+}
+.primaryColorBG {
+  background-color: #2ec0f9;
+}
+.secondaryColorBG {
+  background-color: #67aaf9;
+}
+.tertiaryColorBG {
+  background-color: #9bbdf9;
+}
+.quaternaryColorBG {
+  background-color: #c4e0f9;
+}
+.highlightColorBG {
+  background-color: #b95f89;
+}
+.whiteBG {
+  background-color: #ffffff;
+}
+.blackBG {
+  background-color: #000000;
+}
