@@ -74,10 +74,10 @@ function MedsList(props) {
                       </td>
                     </tr>
                     <tr>
-                      <td className="spaceRow">ico1</td>
-                      <td className="spaceRow">ico2</td>
-                      <td className="spaceRow">ico3</td>
-                      <td className="spaceRow">ico4</td>
+                      <td className="spaceRow">Edit</td>
+                      <td className="spaceRow">Group</td>
+                      <td className="spaceRow">&nbsp;</td>
+                      <td className="spaceRow">Delete</td>
                     </tr>
                     <tr className="headerFooter">
                       <td colSpan="4"> &nbsp;</td>
