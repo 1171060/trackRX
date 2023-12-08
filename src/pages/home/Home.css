@@ -1,0 +1,39 @@
+.icon-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates 4 columns */
+}
+
+.icon-container > div {
+  text-align: center;
+  /* Additional styling */
+}
+
+td {
+  min-width: 100px; /* Adjust as needed */
+}
+table {
+  table-layout: fixed;
+  width: 100%; /* Adjust as needed */
+}
+.align-left {
+  float: left;
+  width: 180px;
+  margin: 15px;
+}
+.headerFooter {
+  background-color: #2aa9e0;
+}
+
+.medFont {
+  font-size: 20pt;
+  font-weight: 600;
+}
+
+.largeFont {
+  font-size: 26pt;
+  font-weight: 600;
+}
+.moveMeDown {
+  position: relative;
+  top: 25px;
+}

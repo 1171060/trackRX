@@ -1,35 +1,47 @@
-import { useEffect } from "react";
-import Home from "./components/Home";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from "react";
+
+import SplashScreenHandler from "./components/SplashScreeenHandler";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/home/Home";
+import NavBar from "./components/NavBar/navBar";
+import MedsList from "./pages/medsList/MedsList";
+import Groups from "./pages/groups/groups";
+import Notifications from "./pages/notifications/nontifications";
+
+import ImportantUsage from "./components/disclaimers/importantUsage";
+import Disclaimer from "./components/disclaimers/disclaimer";
+import DataPrivacy from "./components/disclaimers/dataPrivacy";
+
+import Footer from "./components/footer/footer";
+import ConditionalHeader from "./components/ConditionalHeader";
+
+import FooterNav from "./components/disclaimers/disclaimerNav";
+
+import "./index.css";
+
 function App() {
-  // useEffect(() => {
-  //   // Open (or create) the database
-  //   const open = indexedDB.open("MyDatabase", 1);
-
-  //   // Create the schema
-  //   open.onupgradeneeded = () => {
-  //     const db = open.result;
-  //     db.createObjectStore("MyObjectStore", { keyPath: "id" });
-  //   };
-
-  //   open.onsuccess = () => {
-  //     // Start a new transaction
-  //     const db = open.result;
-  //     const tx = db.transaction("MyObjectStore", "readwrite");
-  //     const store = tx.objectStore("MyObjectStore");
-
-  //     // Add some data
-  //     store.put({ id: 1, name: "John Doe", age: 42 });
-
-  //     // Close the db when the transaction is done
-  //     tx.oncomplete = () => db.close();
-  //   };
-  // }, []);
-
   return (
-    <Router>
-      <Home />
-    </Router>
+    <div className="site-container">
+      <BrowserRouter>
+        <NavBar />
+        <ConditionalHeader />
+        <div className="content-wrap">
+          <Routes>
+            <Route path="/" element={<SplashScreenHandler />} />
+            <Route path="home" element={<Home />} />
+            <Route path="meds" element={<MedsList />} />
+            <Route path="groups" element={<Groups />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="important" element={<ImportantUsage />} />
+            <Route path="disclaimer" element={<Disclaimer />} />
+            <Route path="data-privacy" element={<DataPrivacy />} />
+          </Routes>
+        </div>
+        <FooterNav />
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -1,0 +1,17 @@
+/* index.css or App.css */
+
+/* This ensures that the page content pushes the footer down */
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Styles for the footer */
+.footer {
+  margin-top: auto; /* Pushes the footer to the bottom */
+  background-color: #333; /* Footer background color */
+  color: white; /* Footer text color */
+  text-align: center;
+  padding: 20px 0;
+}

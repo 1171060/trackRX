@@ -1,20 +1,17 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Meds from "./Meds";
-import "./Home.css";
+import Meds from "../../components/database/Meds";
+import "./medsList.css";
+import logo from "../../assets/images/logoB.png";
 
-function Home(props) {
+function MedsList(props) {
   return (
     <div style={{ margin: "10px" }}>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th
-              style={{ textAlign: "center", fontSize: "18pt", width: "100%" }}
-            >
-              trackRX - Medications List
-            </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -74,4 +71,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default MedsList;
