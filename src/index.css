@@ -1,13 +1,126 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 10px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  min-width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo img {
+  width: 150px;
+  height: auto;
+  padding: 10px;
+}
+
+.headerLeft,
+.headerCenter {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+}
+.headerRight {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.rightSideContent {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.textContainer {
+  text-align: center; 
+  max-width: 400px;
+}
+.iconColorShadow {
+  display: flex;
+  align-items: center;
+}
+
+.iconColorShadow > * {
+  margin-right: 20px; 
+}
+
+.iconColorShadow > *:last-child {
+  margin-right: 0;
+}
+
+.headerCenter {
+  text-align: center;
+}
+.headerCenter .headLine {
+  font-family: "Unbound";
+  font-size: 64px;
+  font-weight: 800;
+  text-align: center;
+  justify-self: center;
+  text-shadow: 1px 1px 2px pink;
+}
+
+.copy {
+  max-width: 1200px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.disclaimerHeadline {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* Styles for mobile/small screens */
+@media only screen and (max-width: 600px) {
+  .logo img {
+    width: 300px;
+    height: auto;
+    padding: 5px;
+  }
+  .headerCenter .headLine {
+    display: none;
+  }
+  .headerCenter {
+    flex-basis: 100%;
+    order: 2;
+  }
+  .headerRight {
+    order: 3;
+  }
+  .headerRight {
+    flex: 1;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .copy {
+    max-width: 1200px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .disclaimerHeadline {
+    font-size: 18px;
+    font-weight: 800;
+  }
 }
