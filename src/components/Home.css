@@ -1,0 +1,21 @@
+.icon-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates 4 columns */
+}
+
+.icon-container > div {
+  text-align: center;
+  /* Additional styling */
+}
+
+td {
+  min-width: 100px; /* Adjust as needed */
+}
+table {
+  table-layout: fixed;
+  width: 100%; /* Adjust as needed */
+}
+
+.headerFooter {
+  background-color: rgb(168, 168, 249);
+}
