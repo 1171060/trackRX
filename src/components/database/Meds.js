@@ -5,7 +5,7 @@ const Meds = [
     medDose: "10 mg",
     medFrequency: "every 3 hours while awake",
     medInstructions:
-      "Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,Take with food,",
+      "Take with food,Take with food, Take with food, Take with food, Take with foodTake with food,Take with food, Take with food, Take with food, Take with foodTake with food,Take with food, Take with food, Take with food, Take with food",
     medStartDate: "10-10-2023",
     medEndDate: "6/12/2024",
   },
