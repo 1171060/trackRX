@@ -24,32 +24,32 @@ import MedList from "./js/MedList"; // Not used in the Routes below
 import "./index.css";
 
 function App() {
-  return (
-    <div className="site-container">
-      <BrowserRouter>
-        <NavBar />
-        <ConditionalHeader />
-        <div className="content-wrap">
-          <Routes>
-            <Route path="/" element={<SplashScreenHandler />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/meds" element={<MedsManager />} />
-            <Route path="/add-med" element={<MedForm />} />
-            <Route path="/edit-med/:medId" element={<MedForm />} />
-            <Route path="/groups" element={<Groups />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/add-group" element={<GroupTrackForm />} />
-            <Route path="/important" element={<ImportantUsage />} />
-            <Route path="/disclaimer" element={<Disclaimer />} />
-            <Route path="/data-privacy" element={<DataPrivacy />} />
-            {/* Other routes can be added as needed */}
-          </Routes>
-        </div>
-        <FooterNav />
-        <Footer />
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div className="site-container">
+			<BrowserRouter>
+				<NavBar />
+				<ConditionalHeader />
+				<div className="content-wrap">
+					<Routes>
+						<Route path="/" element={<SplashScreenHandler />} />
+						<Route path="/home" element={<Home />} />
+						<Route path="/meds" element={<MedsManager />} />
+						<Route path="/add-med" element={<MedForm />} />
+						<Route path="/edit-med/:medId" element={<MedForm />} />
+						<Route path="/groups" element={<Groups />} />
+						<Route path="/profile" element={<Profile />} />
+						<Route path="/add-group" element={<GroupTrackForm />} />
+						<Route path="/important" element={<ImportantUsage />} />
+						<Route path="/disclaimer" element={<Disclaimer />} />
+						<Route path="/data-privacy" element={<DataPrivacy />} />
+						{/* Other routes can be added as needed */}
+					</Routes>
+				</div>
+				<FooterNav />
+				<Footer />
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
