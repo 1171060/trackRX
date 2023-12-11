@@ -61,10 +61,13 @@ function MedsList(props) {
               <div className="medActions">
                 <a
                   href="#"
-                  onClick={() => onEditMed(item)}
+                  //onClick={() => onEditMed(item)}
                   className="actionLink"
                   title="Edit this medication"
-                ></a>
+                >
+                  <img src={editMed} className="actionIcon" alt="Group" />
+                  <span>Edit</span>
+                </a>
                 <a
                   href="#"
                   className="actionLink"
