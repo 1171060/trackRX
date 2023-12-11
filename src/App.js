@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SplashScreenHandler from "./components/SplashScreenHandler";
 import Home from "./pages/home/Home";
 import NavBar from "./components/NavBar/navBar";
-import MedsList from "./pages/medsList/MedsList";
 import Groups from "./pages/groups/groups";
 import Profile from "./pages/profile/profile";
 import ImportantUsage from "./components/disclaimers/importantUsage";
@@ -16,10 +15,11 @@ import ConditionalHeader from "./components/ConditionalHeader";
 import FooterNav from "./components/disclaimers/disclaimerNav";
 
 // Importing forms
-import MedForm from "./js/medForm";
+import MedsManager from "./pages/medsList/MedsManager"; // Ensure the path is correct
+import MedForm from "./js/medForm"; // Import MedForm
 import GroupTrackForm from "./js/GroupTrackForm";
-import MedList from "./js/MedList";
-import MedsManager from "./pages/medsList/MedsManager";
+import MedList from "./js/MedList"; // Not used in the Routes below
+
 // Importing CSS
 import "./index.css";
 
@@ -33,16 +33,16 @@ function App() {
           <Routes>
             <Route path="/" element={<SplashScreenHandler />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/meds" element={<MedsList />} />
+            <Route path="/meds" element={<MedsManager />} />
+            <Route path="/add-med" element={<MedForm />} />
+            <Route path="/edit-med/:medId" element={<MedForm />} />
             <Route path="/groups" element={<Groups />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/add-med" element={<MedForm />} />
             <Route path="/add-group" element={<GroupTrackForm />} />
-            <Route path="/med-list" element={<MedList />} />
             <Route path="/important" element={<ImportantUsage />} />
             <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="/data-privacy" element={<DataPrivacy />} />
-            <Route path="/meds" element={<MedsManager />} />
+            {/* Other routes can be added as needed */}
           </Routes>
         </div>
         <FooterNav />

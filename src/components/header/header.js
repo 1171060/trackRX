@@ -14,8 +14,19 @@ function Header() {
       .join(" - ");
   };
 
-  // Getting the formatted page title
-  const pageTitle = formatPageTitle(location.pathname);
+  // Function to get the header text based on the route
+  const getHeaderText = () => {
+    const formattedPageTitle = formatPageTitle(location.pathname);
+    if (formattedPageTitle === "Add-Med") {
+      return "Add Med Record";
+    } else if (formattedPageTitle === "Edit-Med") {
+      return "Update Med Record";
+    }
+    return formattedPageTitle; // Display the formatted page title for other pages
+  };
+
+  // Getting the header text
+  const headerText = getHeaderText();
 
   return (
     <div style={{ textAlign: "center", fontSize: "18pt", width: "100%" }}>
@@ -24,7 +35,7 @@ function Header() {
         alt="Logo"
         style={{ width: 100, margin: 10, justifySelf: "center" }}
       />
-      &nbsp; trackRX {pageTitle && `- ${pageTitle}`}
+      &nbsp; trackRX {headerText && `- ${headerText}`}
     </div>
   );
 }

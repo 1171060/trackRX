@@ -1,98 +1,97 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Meds from "../../components/database/Meds";
+//import Meds from "../../components/database/Meds";
+import { fetchFromIndexedDB } from "../../components/database/indexedDBUtils";
+
 import "./medsList.css";
 
-import logo from "../../assets/images/logoB.png";
-import addMeds from "../../assets/images/pill-multiple_on.png";
-import medsSearch from "../../assets/images/search4.png";
 import trashCan from "../../assets/images/delete-forever-outline_on.png";
 import editMed from "../../assets/images/edit3.png";
 import medCat from "../../assets/images/grouping.png";
 
 function MedsList(props) {
-  return (
-    <div style={{ margin: "10px" }}>
-      <div className="menuContainer">
-        <div>
-          <img src={addMeds} className="addMeds" /> Add New Med(s)
-        </div>
-        <div>
-          <input type="text" placeholder="Search " />{" "}
-          <img src={medsSearch} className="medsSearch" />
-        </div>
-      </div>
-      <div className="medsListContainer">
-        {Meds && Meds.length > 0 ? (
-          Meds.map((item) => (
-            <div className="medItem" key={item.id}>
-              <div className="row">
-                <div>
-                  <strong>Name:</strong> {item.medName}
-                </div>
-                <div>
-                  <strong>Start Date:</strong> {item.medStartDate}
-                </div>
-                <div>
-                  <strong>End Date:</strong> {item.medEndDate}
-                </div>
-              </div>
-              <div className="row">
-                <div>
-                  <strong>Dosage:</strong> {item.medDose}
-                </div>
-                <div>
-                  <strong>Frequency:</strong> {item.medFrequency}
-                </div>
-              </div>
-              <div className="row">
-                <div>
-                  <strong>Instructions:</strong> {item.medInstructions}
-                </div>
-              </div>
-              <div className="row">
-                <div>
-                  <strong>Reactions:</strong> {item.medReactions}
-                </div>
-                <div>
-                  <strong>Notes:</strong> {item.medNotes}
-                </div>
-              </div>
-              <div className="medActions">
-                <a
-                  href="#"
-                  //onClick={() => onEditMed(item)}
-                  className="actionLink"
-                  title="Edit this medication"
-                >
-                  <img src={editMed} className="actionIcon" alt="Group" />
-                  <span>Edit</span>
-                </a>
-                <a
-                  href="#"
-                  className="actionLink"
-                  title="Group this medication"
-                >
-                  <img src={medCat} className="actionIcon" alt="Group" />
-                  <span>Group</span>
-                </a>
-                <a
-                  href="#"
-                  className="actionLink"
-                  title="Delete this medication"
-                >
-                  <img src={trashCan} className="actionIcon" alt="Delete" />
-                  <span>Delete</span>
-                </a>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div>No records found</div>
-        )}
-      </div>
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [meds, setMeds] = useState([]);
 
-      <div className="menuContainer">{/* Your menu container content */}</div>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const medsData = await fetchFromIndexedDB("HealthDatabase", "Meds");
+        setMeds(medsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (meds.length === 0) {
+    return <div style={{ margin: "15px" }}>No records found</div>;
+  }
+
+  return (
+    <div style={{ margin: "15px" }}>
+      {meds.map((item) => (
+        <div className="medItem" key={item.medId}>
+          <div className="row">
+            <div>
+              <strong>Name:</strong> {item.medName}
+            </div>
+            <div>
+              <strong>Start Date:</strong> {item.startDate}
+            </div>
+            <div>
+              <strong>End Date:</strong> {item.endDate}
+            </div>
+          </div>
+          <div className="row">
+            <div>
+              <strong>Dosage:</strong> {item.dosage}
+            </div>
+            <div>
+              <strong>Frequency:</strong> {item.frequency}
+            </div>
+          </div>
+          <div className="row">
+            <div>
+              <strong>Instructions:</strong> {item.instructions}
+            </div>
+          </div>
+          <div className="row">
+            <div>
+              <strong>Reactions:</strong> {item.reactions}
+            </div>
+            <div>
+              <strong>Notes:</strong> {item.notes}
+            </div>
+          </div>
+          <div className="row">
+            <div>
+              <strong>Groups/Tracks:</strong> {item.groupTracks}
+            </div>
+          </div>
+          <div className="medActions">
+            <a
+              href="#"
+              onClick={() => props.onEditMed(item.id)} // Use item.id as medId
+              className="actionLink"
+            >
+              <img src={editMed} className="actionIcon" alt="Edit" />
+              <span>Edit</span>
+            </a>
+            <a href="#" className="actionLink" title="Group this medication">
+              <img src={medCat} className="actionIcon" alt="Group" />
+              <span>Group</span>
+            </a>
+            <a href="#" className="actionLink" title="Delete this medication">
+              <img src={trashCan} className="actionIcon" alt="Delete" />
+              <span>Delete</span>
+            </a>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
