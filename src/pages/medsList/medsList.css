@@ -153,7 +153,30 @@ textarea {
 	max-width: 210px;
 }
 .submit-container button {
-	margin-right: 10px; /* Add spacing between Submit and Cancel buttons */
+	margin-right: 10px;
+}
+.modal-content {
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-image {
+	max-width: 65%;
+	margin-bottom: 20px;
+}
+
+.modal-buttons {
+	display: flex;
+	justify-content: space-evenly; /* Evenly spaces the buttons */
+	margin-top: 20px; /* Adds some space above the buttons */
+	min-width: 290px;
+	width: 290px;
+}
+
+.modal-buttons button {
+	flex: 1; /* Gives equal width to buttons */
+	margin: 0 10px; /* Adds space between buttons */
 }
 
 @media (max-width: 768px) {

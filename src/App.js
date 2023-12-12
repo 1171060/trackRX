@@ -15,10 +15,10 @@ import ConditionalHeader from "./components/ConditionalHeader";
 import FooterNav from "./components/disclaimers/disclaimerNav";
 
 // Importing forms
-import MedsManager from "./pages/medsList/MedsManager"; // Ensure the path is correct
-import MedForm from "./js/medForm"; // Import MedForm
+import MedsManager from "./pages/medsList/MedsManager";
+import MedForm from "./js/medForm";
 import GroupTrackForm from "./js/GroupTrackForm";
-import MedList from "./js/MedList"; // Not used in the Routes below
+import MedList from "./js/MedList";
 
 // Importing CSS
 import "./index.css";
@@ -42,7 +42,6 @@ function App() {
 						<Route path="/important" element={<ImportantUsage />} />
 						<Route path="/disclaimer" element={<Disclaimer />} />
 						<Route path="/data-privacy" element={<DataPrivacy />} />
-						{/* Other routes can be added as needed */}
 					</Routes>
 				</div>
 				<FooterNav />
