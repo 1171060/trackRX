@@ -1,262 +1,262 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-	addRecordToIndexedDB,
-	updateRecordInIndexedDB,
-	getRecordById,
+  addRecordToIndexedDB,
+  updateRecordInIndexedDB,
+  getRecordById,
 } from "../components/database/indexedDBUtils";
 
 function MedForm() {
-	const [medName, setMedName] = useState("");
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
-	const [dosage, setDosage] = useState("");
-	const [frequency, setFrequency] = useState("");
-	const [instructions, setInstructions] = useState("");
-	const [reactions, setReactions] = useState("");
-	const [notes, setNotes] = useState("");
-	const [groupTrack, setGroupTrack] = useState("");
-	const [groupTasks, setGroupTasks] = useState([
-		{ id: "default", name: "General" },
-	]);
+  const { medId } = useParams();
+  const navigate = useNavigate();
 
-	const navigate = useNavigate();
-	const { medId } = useParams();
-	console.log("Received medId:", medId); // Check if medId is undefined
+  // Define state variables for form fields
+  const [medData, setMedData] = useState({
+    medName: "",
+    startDate: "",
+    endDate: "",
+    dosage: "",
+    frequency: "",
+    instructions: "",
+    reactions: "",
+    notes: "",
+    groupTrack: "",
+  });
 
-	const numericMedId = medId ? parseInt(medId, 10) : null;
-	const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
-	useEffect(() => {
-		const fetchMedicationData = async () => {
-			try {
-				if (numericMedId) {
-					const specificMedData = await getRecordById(
-						"HealthDatabase",
-						"Meds",
-						numericMedId
-					);
-					if (specificMedData) {
-						// Set state with fetched data
-						setMedName(specificMedData.medName);
-						setStartDate(specificMedData.startDate);
-						setEndDate(specificMedData.endDate);
-						setDosage(specificMedData.dosage);
-						setFrequency(specificMedData.frequency);
-						setInstructions(specificMedData.instructions);
-						setReactions(specificMedData.reactions);
-						setNotes(specificMedData.notes);
-						setGroupTrack(specificMedData.groupTrack);
-					} else {
-						console.log("No data found for ID:", medId);
-					}
-				} else {
-					// Clear the form when there's no medId
-					clearForm();
-				}
-			} catch (error) {
-				console.error("Error fetching data:", error);
-			}
-		};
+  // Define groupTasks here or import it from an external source
+  const groupTasks = [
+    { id: "default", name: "General" },
+    // Add other options as needed
+  ];
 
-		fetchMedicationData();
-	}, [numericMedId]);
+  useEffect(() => {
+    const fetchMedicationData = async () => {
+      if (medId) {
+        // Fetch the existing medication data for editing
+        try {
+          const specificMedData = await getRecordById(
+            "HealthDatabase",
+            "Meds",
+            parseInt(medId, 10)
+          );
 
-	const clearForm = () => {
-		setMedName("");
-		setStartDate("");
-		setEndDate("");
-		setDosage("");
-		setFrequency("");
-		setInstructions("");
-		setReactions("");
-		setNotes("");
-		setGroupTrack("");
-	};
+          if (specificMedData) {
+            // Populate form fields with existing data
+            setMedData(specificMedData);
+          } else {
+            console.log("No data found for ID:", medId);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
 
-	const validateForm = () => {
-		let formIsValid = true;
-		let errors = {};
+    fetchMedicationData();
+  }, [medId]);
 
-		if (!medName) {
-			formIsValid = false;
-			errors["medName"] = "Medication name is required.";
-		}
+  const clearForm = () => {
+    // Reset all form fields
+    setMedData({
+      medName: "",
+      startDate: "",
+      endDate: "",
+      dosage: "",
+      frequency: "",
+      instructions: "",
+      reactions: "",
+      notes: "",
+      groupTrack: "",
+    });
+  };
 
-		if (!startDate) {
-			formIsValid = false;
-			errors["startDate"] = "Start date is required.";
-		}
+  const validateForm = () => {
+    let formIsValid = true;
+    let errors = {};
 
-		if (!dosage) {
-			formIsValid = false;
-			errors["dosage"] = "Dosage is required.";
-		}
+    // Validate form fields
+    if (!medData.medName) {
+      formIsValid = false;
+      errors["medName"] = "Medication name is required.";
+    }
 
-		if (!frequency) {
-			formIsValid = false;
-			errors["frequency"] = "Frequency is required.";
-		}
+    if (!medData.startDate) {
+      formIsValid = false;
+      errors["startDate"] = "Start date is required.";
+    }
 
-		setErrors(errors);
-		return formIsValid;
-	};
+    if (!medData.dosage) {
+      formIsValid = false;
+      errors["dosage"] = "Dosage is required.";
+    }
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (!validateForm()) {
-			console.error("Validation failed");
-			return;
-		}
-		const medData = {
-			medName,
-			startDate,
-			endDate,
-			dosage,
-			frequency,
-			instructions,
-			reactions,
-			notes,
-			groupTrack,
-		};
+    if (!medData.frequency) {
+      formIsValid = false;
+      errors["frequency"] = "Frequency is required.";
+    }
 
-		try {
-			if (medId) {
-				// Update existing record
-				await updateRecordInIndexedDB("HealthDatabase", "Meds", {
-					...medData,
-					id: medId,
-				});
-				console.log("Record updated successfully");
-			} else {
-				// Add new record
-				await addRecordToIndexedDB("HealthDatabase", "Meds", medData);
-				console.log("Record added successfully");
-			}
-			navigate("/meds");
-		} catch (error) {
-			console.error("Error saving data:", error);
-		}
-	};
+    setErrors(errors);
+    return formIsValid;
+  };
 
-	// Function to navigate back to the "meds" page
-	const handleCancel = () => {
-		navigate("/meds");
-	};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      console.error("Validation failed");
+      return;
+    }
 
-	const isNewRecord = !medId;
+    try {
+      if (medId) {
+        // Update existing record
+        await updateRecordInIndexedDB("HealthDatabase", "Meds", medData);
+        console.log("Record updated successfully");
+      } else {
+        // Add new record
+        await addRecordToIndexedDB("HealthDatabase", "Meds", medData);
+        console.log("Record added successfully");
+      }
+      navigate("/meds");
+    } catch (error) {
+      console.error("Error saving data:", error);
+    }
+  };
 
-	return (
-		<div className="med-form">
-			<form onSubmit={handleSubmit} className="med-form">
-				<div className="row">
-					<label>Medication Name:</label>
-					<input
-						type="text"
-						value={medName}
-						onChange={(e) => setMedName(e.target.value)}
-						required
-					/>
-					{errors.medName && <p className="error">{errors.medName}</p>}
-				</div>
+  // Function to navigate back to the "meds" page
+  const handleCancel = () => {
+    navigate("/meds");
+  };
 
-				<div className="row">
-					<div className="date-input">
-						<label>Start Date:</label>
-						<input
-							type="date"
-							value={startDate}
-							onChange={(e) => setStartDate(e.target.value)}
-							required
-						/>
-						{errors.startDate && <p className="error">{errors.startDate}</p>}
-					</div>
-					<div className="date-input">
-						<label>End Date:</label>
-						<input
-							type="date"
-							value={endDate}
-							onChange={(e) => setEndDate(e.target.value)}
-						/>
-					</div>
-				</div>
+  const isNewRecord = !medId;
 
-				<div className="row">
-					<div className="half-width">
-						<label>Dosage: </label>
-						<input
-							type="text"
-							value={dosage}
-							onChange={(e) => setDosage(e.target.value)}
-							required
-						/>
-						{errors.dosage && <p className="error">{errors.dosage}</p>}
-					</div>
-					<div className="half-width">
-						<label>Frequency:</label>
-						<input
-							type="text"
-							value={frequency}
-							onChange={(e) => setFrequency(e.target.value)}
-							required
-						/>
-						{errors.frequency && <p className="error">{errors.frequency}</p>}
-					</div>
-				</div>
+  return (
+    <div className="med-form">
+      <form onSubmit={handleSubmit} className="med-form">
+        <div className="row">
+          <label>Medication Name:</label>
+          <input
+            type="text"
+            value={medData.medName}
+            onChange={(e) =>
+              setMedData({ ...medData, medName: e.target.value })
+            }
+            required
+          />
+          {errors.medName && <p className="error">{errors.medName}</p>}
+        </div>
 
-				<div className="row">
-					<label>Instructions:</label>
-					<textarea
-						value={instructions}
-						onChange={(e) => setInstructions(e.target.value)}
-						required
-					></textarea>
-					{errors.instructions && (
-						<p className="error">{errors.instructions}</p>
-					)}
-				</div>
+        <div className="row">
+          <div className="date-input">
+            <label>Start Date:</label>
+            <input
+              type="date"
+              value={medData.startDate}
+              onChange={(e) =>
+                setMedData({ ...medData, startDate: e.target.value })
+              }
+              required
+            />
+            {errors.startDate && <p className="error">{errors.startDate}</p>}
+          </div>
+          <div className="date-input">
+            <label>End Date:</label>
+            <input
+              type="date"
+              value={medData.endDate}
+              onChange={(e) =>
+                setMedData({ ...medData, endDate: e.target.value })
+              }
+            />
+          </div>
+        </div>
 
-				<div className="row">
-					<label>My Reactions To Med:</label>
-					<textarea
-						value={reactions}
-						onChange={(e) => setReactions(e.target.value)}
-					></textarea>
-				</div>
+        <div className="row">
+          <div className="half-width">
+            <label>Dosage: </label>
+            <input
+              type="text"
+              value={medData.dosage}
+              onChange={(e) =>
+                setMedData({ ...medData, dosage: e.target.value })
+              }
+              required
+            />
+            {errors.dosage && <p className="error">{errors.dosage}</p>}
+          </div>
+          <div className="half-width">
+            <label>Frequency:</label>
+            <input
+              type="text"
+              value={medData.frequency}
+              onChange={(e) =>
+                setMedData({ ...medData, frequency: e.target.value })
+              }
+              required
+            />
+            {errors.frequency && <p className="error">{errors.frequency}</p>}
+          </div>
+        </div>
 
-				<div className="row">
-					<label>Notes About Med:</label>
-					<textarea
-						value={notes}
-						onChange={(e) => setNotes(e.target.value)}
-					></textarea>
-				</div>
+        <div className="row">
+          <label>Instructions:</label>
+          <textarea
+            value={medData.instructions}
+            onChange={(e) =>
+              setMedData({ ...medData, instructions: e.target.value })
+            }
+            required
+          ></textarea>
+          {errors.instructions && (
+            <p className="error">{errors.instructions}</p>
+          )}
+        </div>
 
-				<div className="row">
-					<div className="select-container">
-						<label>Select a Group/Track: &nbsp;</label>
-						<select
-							value={groupTrack}
-							onChange={(e) => setGroupTrack(e.target.value)}
-						>
-							<option value="">Select a Group/Track</option>
-							{groupTasks.map((task) => (
-								<option key={task.id} value={task.id}>
-									{task.name}
-								</option>
-							))}
-						</select>
-					</div>
-					<div className="submit-container">
-						<button type="button" onClick={handleCancel}>
-							Cancel
-						</button>
-						<button type="submit">Submit</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	);
+        <div className="row">
+          <label>My Reactions To Med:</label>
+          <textarea
+            value={medData.reactions}
+            onChange={(e) =>
+              setMedData({ ...medData, reactions: e.target.value })
+            }
+          ></textarea>
+        </div>
+
+        <div className="row">
+          <label>Notes About Med:</label>
+          <textarea
+            value={medData.notes}
+            onChange={(e) => setMedData({ ...medData, notes: e.target.value })}
+          ></textarea>
+        </div>
+
+        <div className="row">
+          <div className="select-container">
+            <label>Select a Group/Track: &nbsp;</label>
+            <select
+              value={medData.groupTrack}
+              onChange={(e) =>
+                setMedData({ ...medData, groupTrack: e.target.value })
+              }
+            >
+              <option value="">Select a Group/Track</option>
+              {groupTasks.map((task) => (
+                <option key={task.id} value={task.id}>
+                  {task.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="submit-container">
+            <button type="button" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 }
-
 export default MedForm;

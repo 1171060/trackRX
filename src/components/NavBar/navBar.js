@@ -10,9 +10,9 @@ const NavBar = () => {
         <li>
           <a href="/meds">Medications</a>
         </li>
-        <li>
+        {/* <li>
           <a href="/groups">Grouping</a>
-        </li>
+        </li> */}
         <li>
           <a href="/profile">Settings/Profile</a>
         </li>

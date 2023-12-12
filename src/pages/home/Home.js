@@ -4,10 +4,10 @@ import logo from "../../assets/images/logoB.png";
 function Home(props) {
   return (
     <div style={{ margin: "10px" }} align="left">
-      <div class="text-wrap">
+      <div className="text-wrap">
         <img src={logo} class="align-left" />
         <p>
-          <span class="largeFont moveMeDown">Welcome</span>
+          <span className="largeFont moveMeDown">Welcome</span>
         </p>
         <p>
           to &nbsp; &nbsp;<span class="medFont">trackRX</span>, the ultimate
