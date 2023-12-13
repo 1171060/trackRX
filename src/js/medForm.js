@@ -19,12 +19,20 @@ function MedForm() {
 		instructions: "",
 		reactions: "",
 		notes: "",
-		groupTrack: "",
+		groupTracks: [],
 	});
 
 	const [errors, setErrors] = useState({});
 
-	const groupTasks = [{ id: "default", name: "General" }];
+	const groupTasks = [
+		{ id: "General", name: "General" },
+		{ id: "Heart - Stroke", name: "Heart - Stroke" },
+		{ id: "Diabetes", name: "Diabetes" },
+		{ id: "Pain", name: "Pain" },
+		{ id: "Blood Pressure", name: "Blood Pressure" },
+		{ id: "Asthma", name: "Asthma" },
+		{ id: "Cholesterol", name: "Cholesterol" },
+	];
 
 	useEffect(() => {
 		const fetchMedicationData = async () => {
@@ -50,20 +58,20 @@ function MedForm() {
 		fetchMedicationData();
 	}, [medId]);
 
-	const clearForm = () => {
-		// Reset all form fields
-		setMedData({
-			medName: "",
-			startDate: "",
-			endDate: "",
-			dosage: "",
-			frequency: "",
-			instructions: "",
-			reactions: "",
-			notes: "",
-			groupTrack: "",
-		});
-	};
+	// const clearForm = () => {
+	// 	// Reset all form fields
+	// 	setMedData({
+	// 		medName: "",
+	// 		startDate: "",
+	// 		endDate: "",
+	// 		dosage: "",
+	// 		frequency: "",
+	// 		instructions: "",
+	// 		reactions: "",
+	// 		notes: "",
+	// 		groupTracks: [],
+	// 	});
+	// };
 
 	const validateForm = () => {
 		let formIsValid = true;
@@ -89,7 +97,10 @@ function MedForm() {
 			formIsValid = false;
 			errors["frequency"] = "Frequency is required.";
 		}
-
+		if (!medData.groupTracks.length) {
+			formIsValid = false;
+			errors["groupTracks"] = "At least one group track must be selected.";
+		}
 		setErrors(errors);
 		return formIsValid;
 	};
@@ -120,8 +131,16 @@ function MedForm() {
 	const handleCancel = () => {
 		navigate("/meds");
 	};
+	const handleGroupTracksChange = (e) => {
+		// Get all selected options
+		const selectedOptions = Array.from(
+			e.target.selectedOptions,
+			(option) => option.value
+		);
+		setMedData({ ...medData, groupTracks: selectedOptions });
+	};
 
-	const isNewRecord = !medId;
+	// const isNewRecord = !medId;
 
 	return (
 		<div className="med-form">
@@ -198,7 +217,6 @@ function MedForm() {
 						onChange={(e) =>
 							setMedData({ ...medData, instructions: e.target.value })
 						}
-						required
 					></textarea>
 					{errors.instructions && (
 						<p className="error">{errors.instructions}</p>
@@ -227,18 +245,19 @@ function MedForm() {
 					<div className="select-container">
 						<label>Select a Group/Track: &nbsp;</label>
 						<select
-							value={medData.groupTrack}
-							onChange={(e) =>
-								setMedData({ ...medData, groupTrack: e.target.value })
-							}
+							multiple
+							value={medData.groupTracks}
+							onChange={handleGroupTracksChange}
 						>
-							<option value="">Select a Group/Track</option>
 							{groupTasks.map((task) => (
 								<option key={task.id} value={task.id}>
 									{task.name}
 								</option>
 							))}
 						</select>
+						{errors.groupTracks && (
+							<p className="error">{errors.groupTracks}</p>
+						)}
 					</div>
 					<div className="submit-container">
 						<button type="button" onClick={handleCancel}>

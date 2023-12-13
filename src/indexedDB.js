@@ -1,7 +1,7 @@
 function openDatabase() {
 	return new Promise((resolve, reject) => {
 		// Define the database version
-		const DB_VERSION = 4;
+		const DB_VERSION = 11;
 		const dbName = "HealthDatabase";
 
 		// Open a connection to the database
@@ -35,12 +35,31 @@ function openDatabase() {
 				});
 			}
 
-			// Create 'GroupTracks' object store if it doesn't exist
+			let groupTracksStore;
 			if (!db.objectStoreNames.contains("GroupTracks")) {
-				db.createObjectStore("GroupTracks", {
+				groupTracksStore = db.createObjectStore("GroupTracks", {
 					keyPath: "id",
 					autoIncrement: true,
 				});
+			} else {
+				groupTracksStore = event.target.transaction.objectStore("GroupTracks");
+			}
+
+			// Create an index for 'type' if it does not already exist
+			if (!groupTracksStore.indexNames.contains("type")) {
+				groupTracksStore.createIndex("type", "type", { unique: false });
+			}
+			// Create 'HealthProfessionals' object store if it doesn't exist
+			if (!db.objectStoreNames.contains("HealthProfessionals")) {
+				const healthProStore = db.createObjectStore("HealthProfessionals", {
+					keyPath: "proID",
+					autoIncrement: true,
+				});
+
+				// Create indexes for 'HealthProfessionals' store
+				healthProStore.createIndex("proName", "proName", { unique: false });
+				healthProStore.createIndex("proType", "proType", { unique: false });
+				// Add more indexes for other fields as needed
 			}
 		};
 
@@ -56,3 +75,43 @@ function openDatabase() {
 		};
 	});
 }
+// Function to add a health professional
+export function addHealthProfessional(healthProfessional) {
+	return new Promise((resolve, reject) => {
+		openDatabase()
+			.then((db) => {
+				const transaction = db.transaction(
+					["HealthProfessionals"],
+					"readwrite"
+				);
+				const store = transaction.objectStore("HealthProfessionals");
+				const request = store.add(healthProfessional);
+
+				request.onsuccess = () => resolve(request.result);
+				request.onerror = () => reject(request.error);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+	});
+}
+
+// Function to add a group track
+export function addGroupTrack(groupTrack) {
+	return new Promise((resolve, reject) => {
+		openDatabase()
+			.then((db) => {
+				const transaction = db.transaction(["GroupTracks"], "readwrite");
+				const store = transaction.objectStore("GroupTracks");
+				const request = store.add(groupTrack);
+
+				request.onsuccess = () => resolve(request.result);
+				request.onerror = () => reject(request.error);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+	});
+}
+
+export { openDatabase };
