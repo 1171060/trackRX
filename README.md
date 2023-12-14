@@ -20,3 +20,11 @@ An application to track medicine(s) a user is taking, with data such as official
 - User can view expected end of medication need if applicable
 - User can search or filter their tracks or medications
 - User can group medications for easier tracking and organization
+
+## SCREENSHOTS
+
+<img src="https://tftedu.ca/CapStoneAssets/trackRX-home.png" width="450" >
+<img src="https://tftedu.ca/CapStoneAssets/trackRX-meds.png" width="450" >
+<img src="https://tftedu.ca/CapStoneAssets/trackRX-delete.png" width="450" >
+<img src="https://tftedu.ca/CapStoneAssets/trackRX-add-healthcare-pro.png" width="450" >
+<img src="https://tftedu.ca/CapStoneAssets/trackRX-view-healthcare-pro.png" width="450" >
