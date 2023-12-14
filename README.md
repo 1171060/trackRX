@@ -23,5 +23,5 @@ An application to track medicine(s) a user is taking, with data such as official
 
 ## SCREENSHOTS
 
-<img src="https://tftedu.ca/CapStoneAssets/trackRX-home.png" width="250" ><img src="https://tftedu.ca/CapStoneAssets/trackRX-meds.png" width="250" ><img src="https://tftedu.ca/CapStoneAssets/trackRX-delete.png" width="250" >
+<img src="https://tftedu.ca/CapStoneAssets/trackRX-home.png" width="250" ><img src="https://tftedu.ca/CapStoneAssets/trackRX-meds.png" width="250" ><img src="https://tftedu.ca/CapStoneAssets/trackRX-delete.png" width="270" >
 <img src="https://tftedu.ca/CapStoneAssets/trackRX-add-healthcare-pro.png" width="250" ><img src="https://tftedu.ca/CapStoneAssets/trackRX-view-healthcare-pro.png" width="250" >
