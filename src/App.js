@@ -6,7 +6,7 @@ import SplashScreenHandler from "./components/SplashScreenHandler";
 import Home from "./pages/home/Home";
 import NavBar from "./components/NavBar/navBar";
 import Groups from "./pages/groups/groups";
-import Profile from "./pages/profile/profile";
+import HealthCareProvider from "./pages/careProvider/HealthCareProvider";
 import ImportantUsage from "./components/disclaimers/importantUsage";
 import Disclaimer from "./components/disclaimers/disclaimer";
 import DataPrivacy from "./components/disclaimers/dataPrivacy";
@@ -28,42 +28,42 @@ import "./index.css";
 import { openDatabase } from "./indexedDB";
 
 function App() {
-	useEffect(() => {
-		openDatabase()
-			.then((db) => {
-				console.log("Database opened successfully:", db);
-			})
-			.catch((error) => {
-				console.error("Error opening database:", error);
-			});
-	}, []);
-	return (
-		<div className="site-container">
-			<BrowserRouter>
-				<NavBar />
-				<ConditionalHeader />
-				<div className="content-wrap">
-					<Routes>
-						<Route path="/" element={<SplashScreenHandler />} />
-						<Route path="/home" element={<Home />} />
-						<Route path="/meds" element={<MedsManager />} />
-						<Route path="/add-med" element={<MedForm />} />
-						<Route path="/edit-med/:medId" element={<MedForm />} />
-						<Route path="/groups" element={<Groups />} />
-						<Route path="/profile" element={<Profile />} />
-						<Route path="/settings" element={<Settings />} />
-						<Route path="/add-group" element={<GroupTrackForm />} />
-						<Route path="/important" element={<ImportantUsage />} />
-						<Route path="/disclaimer" element={<Disclaimer />} />
-						<Route path="/data-privacy" element={<DataPrivacy />} />
-						<Route path="*" element={<NotFoundPage />} />
-					</Routes>
-				</div>
-				<FooterNav />
-				<Footer />
-			</BrowserRouter>
-		</div>
-	);
+  useEffect(() => {
+    openDatabase()
+      .then((db) => {
+        console.log("Database opened successfully:", db);
+      })
+      .catch((error) => {
+        console.error("Error opening database:", error);
+      });
+  }, []);
+  return (
+    <div className="site-container">
+      <BrowserRouter>
+        <NavBar />
+        <ConditionalHeader />
+        <div className="content-wrap">
+          <Routes>
+            <Route path="/" element={<SplashScreenHandler />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/meds" element={<MedsManager />} />
+            <Route path="/add-med" element={<MedForm />} />
+            <Route path="/edit-med/:medId" element={<MedForm />} />
+            <Route path="/groups" element={<Groups />} />
+            <Route path="/healthcare" element={<HealthCareProvider />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/add-group" element={<GroupTrackForm />} />
+            <Route path="/important" element={<ImportantUsage />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/data-privacy" element={<DataPrivacy />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+        <FooterNav />
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
